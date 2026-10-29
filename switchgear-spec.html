@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LX-4000 Switchgear Submittal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an engineering submittal document — title block on top, numbered spec sections in one reading column, ratings and contents as ruled tables. */
+:root{
+  --paper:#f6f8fa; --sheet:#ffffff; --ink:#15202b; --muted:#566473; --rule:#d3dae2;
+  --accent:#1f5f8b; --mark:#c25a14; --tint:#eef3f7;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0f151b; --sheet:#161e26; --ink:#e4e9ee; --muted:#9aa7b4; --rule:#2b3742;
+  --accent:#7cb4dc; --mark:#f0954f; --tint:#1c2731; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f151b; --sheet:#161e26; --ink:#e4e9ee; --muted:#9aa7b4; --rule:#2b3742;
+  --accent:#7cb4dc; --mark:#f0954f; --tint:#1c2731; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:4px}
+.tb{display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr));border-bottom:2px solid var(--ink)}
+.tb>div{padding:12px 16px;border-right:1px solid var(--rule);min-width:0}
+.tb>div:last-child{border-right:0}
+.tb .k{font:500 11px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:4px}
+.tb .v{font:600 15px/1.3 var(--body)}
+.tb .v.mono{font-family:var(--mono);font-weight:500}
+@media (max-width:640px){.tb{grid-template-columns:1fr 1fr}.tb>div:first-child{grid-column:1/-1;border-right:0;border-bottom:1px solid var(--rule)}.tb>div:nth-child(3){border-right:0}}
+.head{padding:28px clamp(16px,4vw,40px) 8px}
+.head h1{font:800 clamp(28px,4.6vw,40px)/1.05 var(--display);margin:4px 0 10px;text-wrap:balance;letter-spacing:-.01em}
+.eyebrow{font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+.lede{color:var(--muted);max-width:66ch;margin:0}
+.notice{margin:18px clamp(16px,4vw,40px) 0;border:1px solid var(--mark);border-left-width:5px;padding:10px 14px;font-size:14px;color:var(--ink);background:var(--tint)}
+.notice b{color:var(--mark)}
+.body{padding:8px clamp(16px,4vw,40px) 32px}
+section{border-top:1px solid var(--rule);padding-top:18px;margin-top:22px}
+h2{font:700 20px/1.25 var(--display);margin:0 0 10px;display:flex;gap:12px;align-items:baseline;text-wrap:balance}
+h2 .n{font:500 14px var(--mono);color:var(--accent);min-width:3.2em}
+p,li{max-width:68ch}
+ol.clauses{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+ol.clauses li{display:grid;grid-template-columns:3.6em minmax(0,1fr);gap:8px}
+ol.clauses .c{font:500 13px/1.75 var(--mono);color:var(--muted)}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--tint)}
+td.v{font-family:var(--mono);font-size:14px;white-space:nowrap}
+.std{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:8px 0 0;list-style:none}
+.std li{font:500 13px var(--mono);border:1px solid var(--rule);border-radius:3px;padding:4px 8px;background:var(--tint)}
+.check{list-style:none;padding:0;margin:8px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 20px}
+.check li{display:flex;gap:10px;align-items:flex-start}
+.check li::before{content:"";flex:none;width:12px;height:12px;margin-top:6px;border:1.5px solid var(--accent);border-radius:2px}
+.foot{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;border-top:2px solid var(--ink);padding:12px 16px;font:500 12px/1.4 var(--mono);color:var(--muted)}
+.credit{font-size:13px;color:var(--muted);margin:16px 2px 0;max-width:72ch}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+ <article class="sheet">
+  <div class="tb">
+   <div><span class="k">Document</span><span class="v">Technical Specification and Submittal Data</span></div>
+   <div><span class="k">Doc no.</span><span class="v mono">LX-SPEC-26-2300</span></div>
+   <div><span class="k">Revision</span><span class="v mono">B</span></div>
+   <div><span class="k">Section</span><span class="v mono">26 23 00</span></div>
+  </div>
+
+  <header class="head">
+   <span class="eyebrow">Low-voltage metal-enclosed switchgear</span>
+   <h1>LX-4000 Draw-Out Switchgear, 480Y/277 VAC</h1>
+   <p class="lede">This document defines the ratings, construction, testing, and submittal requirements for LX-4000 switchgear lineups. Engineers use it for review and approval. Contractors use it for ordering and installation.</p>
+  </header>
+
+  <p class="notice"><b>Writing sample.</b> LX-4000 is a fictional product. Ratings and clauses show typical industry practice and are not for construction.</p>
+
+  <div class="body">
+   <section>
+    <h2><span class="n">1.0</span>Scope</h2>
+    <ol class="clauses">
+     <li><span class="c">1.1</span><span>This specification covers indoor, low-voltage, metal-enclosed switchgear with draw-out power circuit breakers for service entrance and distribution at 600 VAC and below.</span></li>
+     <li><span class="c">1.2</span><span>Each lineup includes the main breaker section, feeder breaker sections, metering and controls, and the bus and enclosure that connect them.</span></li>
+     <li><span class="c">1.3</span><span>Transformers, cable, conduit, and field-installed equipment outside the switchgear enclosure are not in scope.</span></li>
+    </ol>
+   </section>
+
+   <section>
+    <h2><span class="n">2.0</span>Applicable standards</h2>
+    <p>The switchgear is designed, built, and tested to the latest editions of these standards. Where they conflict, the stricter requirement applies.</p>
+    <ul class="std">
+     <li>UL 1558</li><li>IEEE C37.20.1</li><li>IEEE C37.13</li><li>UL 1066</li><li>ANSI C37.16</li><li>ANSI C37.51</li><li>NFPA 70 (NEC)</li><li>NEMA SG 5</li>
+    </ul>
+   </section>
+
+   <section>
+    <h2><span class="n">3.0</span>Ratings</h2>
+    <div class="tw"><table>
+     <thead><tr><th>Parameter</th><th>Standard offering</th><th>Options</th></tr></thead>
+     <tbody>
+      <tr><td>System voltage</td><td class="v">480Y/277 VAC, 3Ø 4W</td><td>208Y/120, 480 VAC 3Ø 3W</td></tr>
+      <tr><td>Frequency</td><td class="v">60 Hz</td><td>50 Hz</td></tr>
+      <tr><td>Maximum design voltage</td><td class="v">635 VAC</td><td>—</td></tr>
+      <tr><td>Main bus continuous current</td><td class="v">2000–4000 A</td><td>5000 A with forced-air cooling</td></tr>
+      <tr><td>Short-circuit withstand (bus bracing)</td><td class="v">65 kA sym.</td><td>85 kA or 100 kA sym.</td></tr>
+      <tr><td>Bus material</td><td class="v">Silver-plated copper</td><td>Tin-plated aluminum</td></tr>
+      <tr><td>Enclosure</td><td class="v">NEMA 1, indoor</td><td>Arc-resistant per IEEE C37.20.7</td></tr>
+     </tbody>
+    </table></div>
+   </section>
+
+   <section>
+    <h2><span class="n">4.0</span>Construction</h2>
+    <ol class="clauses">
+     <li><span class="c">4.1</span><span>Each vertical section has separate compartments for the breaker, the main bus, and outgoing cable. Grounded steel barriers separate the compartments.</span></li>
+     <li><span class="c">4.2</span><span>Breakers rack between Connected, Test, and Disconnected positions with the compartment door closed. A position indicator is visible from the front.</span></li>
+     <li><span class="c">4.3</span><span>Mechanical interlocks prevent racking a closed breaker and prevent closing a breaker between positions.</span></li>
+     <li><span class="c">4.4</span><span>Automatic shutters cover the primary stabs when a breaker is withdrawn. Shutters can be padlocked closed.</span></li>
+     <li><span class="c">4.5</span><span>A copper ground bus runs the full length of the lineup and bonds to every section.</span></li>
+     <li><span class="c">4.6</span><span>Each lineup provides a connection point for a remote racking device so operators can rack breakers from outside the arc flash boundary.</span></li>
+    </ol>
+   </section>
+
+   <section>
+    <h2><span class="n">5.0</span>Power circuit breakers</h2>
+    <ol class="clauses">
+     <li><span class="c">5.1</span><span>Breakers are draw-out, stored-energy, low-voltage power circuit breakers that meet IEEE C37.13 and UL 1066.</span></li>
+     <li><span class="c">5.2</span><span>Each breaker has an electronic trip unit with long-time, short-time, instantaneous, and ground-fault (LSIG) functions.</span></li>
+     <li><span class="c">5.3</span><span>Trip units have a maintenance mode that lowers the instantaneous pickup to reduce incident energy during work. The mode shows a local indicator when active.</span></li>
+    </ol>
+   </section>
+
+   <section>
+    <h2><span class="n">6.0</span>Factory testing</h2>
+    <p>Each lineup passes production tests per IEEE C37.20.1 before shipment. Certified test reports are included with the final documentation.</p>
+    <div class="tw"><table>
+     <thead><tr><th>Test</th><th>Purpose</th></tr></thead>
+     <tbody>
+      <tr><td>Dielectric withstand</td><td>Confirms insulation integrity of the bus and primary circuits.</td></tr>
+      <tr><td>Mechanical operation</td><td>Confirms breakers rack, close, open, and interlock as designed.</td></tr>
+      <tr><td>Grounding continuity</td><td>Confirms the ground bus and frame bonds are continuous.</td></tr>
+      <tr><td>Control wiring and devices</td><td>Confirms control circuits, meters, and relays function and are wired to the diagrams.</td></tr>
+     </tbody>
+    </table></div>
+   </section>
+
+   <section>
+    <h2><span class="n">7.0</span>Submittal package contents</h2>
+    <p>Submit the following for engineering review. Approval drawings must match the order before release to manufacturing.</p>
+    <ul class="check">
+     <li>Front elevations with dimensions and weights</li>
+     <li>Floor plan and conduit entry areas</li>
+     <li>One-line diagram</li>
+     <li>Three-line diagram</li>
+     <li>Bill of material</li>
+     <li>Breaker and trip unit data sheets</li>
+     <li>Time-current curves</li>
+     <li>Control wiring diagrams</li>
+     <li>Nameplate schedule</li>
+     <li>Short-circuit and bus ratings summary</li>
+    </ul>
+   </section>
+
+   <section>
+    <h2><span class="n">8.0</span>Installation and field testing</h2>
+    <ol class="clauses">
+     <li><span class="c">8.1</span><span>Install on a level concrete pad and anchor per the seismic and anchoring details on the approved drawings.</span></li>
+     <li><span class="c">8.2</span><span>Torque bus splice and cable lug connections to the values on the installation instructions. Record each torque value on the installation checklist.</span></li>
+     <li><span class="c">8.3</span><span>Perform acceptance testing per ANSI/NETA ATS before energizing. Testing includes insulation resistance, breaker trip testing, and verification of protective settings against the coordination study.</span></li>
+     <li><span class="c">8.4</span><span>Apply arc flash labels from the site's incident energy analysis before the equipment is placed in service.</span></li>
+    </ol>
+   </section>
+  </div>
+
+  <div class="foot"><span>LX-SPEC-26-2300 · Rev B</span><span>Prepared by: L. Reynolds</span><span>Page 1 of 1</span></div>
+ </article>
+ <p class="credit">Technical writing sample by Lane Reynolds, built with AI-assisted drafting. The product, document number, and ratings are illustrative. Standards cited are real industry references.</p>
+</div>
+
+</body>
+</html>

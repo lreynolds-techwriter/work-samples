@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rack It Out Safely</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Courier+Prime:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a production script — cover block with run time and specs, then an A/V two-column script with timecodes down the left edge. */
+:root{
+  --bg:#f3f4f2; --page:#ffffff; --ink:#1b1d1c; --muted:#5d625f; --rule:#d6d9d6;
+  --arc:#d9480f; --scene:#2f4858; --cue:#eef1ef;
+  --display:"Oswald","Arial Narrow",Arial,sans-serif;
+  --body:"Work Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --vo:"Courier Prime","Courier New",Courier,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121514; --page:#1a1e1d; --ink:#e7eae8; --muted:#a0a7a3; --rule:#2f3532;
+  --arc:#ff8a4c; --scene:#9cc3d9; --cue:#222826; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121514; --page:#1a1e1d; --ink:#e7eae8; --muted:#a0a7a3; --rule:#2f3532;
+  --arc:#ff8a4c; --scene:#9cc3d9; --cue:#222826; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);margin:0}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.page{background:var(--page);border:1px solid var(--rule);border-radius:4px}
+.cover{padding:28px clamp(16px,4vw,40px) 22px;border-bottom:1px solid var(--rule)}
+.kicker{font:600 13px/1 var(--display);text-transform:uppercase;letter-spacing:.14em;color:var(--arc)}
+h1{font:600 clamp(32px,5.4vw,52px)/1 var(--display);text-transform:uppercase;letter-spacing:.01em;margin:8px 0 10px;text-wrap:balance}
+.sub{color:var(--muted);max-width:64ch;margin:0 0 18px}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.specs div{background:var(--page);padding:10px 12px;min-width:0}
+.specs .k{display:block;font:600 11px var(--display);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.specs .v{font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:12px clamp(16px,4vw,40px);border-bottom:1px solid var(--rule);font-size:13px;color:var(--muted)}
+.legend b{color:var(--ink)}
+.cols{display:grid;grid-template-columns:5.5em minmax(0,1fr) minmax(0,1.15fr);gap:0 18px;padding:10px clamp(16px,4vw,40px);font:600 11px var(--display);text-transform:uppercase;letter-spacing:.12em;color:var(--muted);border-bottom:2px solid var(--ink)}
+.scene{padding:0 clamp(16px,4vw,40px)}
+.slug{font:600 15px var(--display);text-transform:uppercase;letter-spacing:.06em;color:var(--scene);padding:18px 0 6px;border-bottom:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:5.5em minmax(0,1fr) minmax(0,1.15fr);gap:0 18px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.tc{font:700 13px/1.6 var(--vo);color:var(--muted);font-variant-numeric:tabular-nums}
+.vis{font-size:15px;min-width:0}
+.vis .ost{display:inline-block;margin-top:6px;font:600 12px/1.3 var(--display);text-transform:uppercase;letter-spacing:.06em;background:var(--cue);border:1px solid var(--rule);padding:4px 8px;border-radius:3px}
+.aud{font:400 16px/1.6 var(--vo);min-width:0}
+.aud .who{display:block;font:700 12px var(--vo);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.aud .sfx{display:block;font-style:italic;color:var(--muted);font-size:14px;margin-top:4px}
+.warn{border-left:4px solid var(--arc);padding-left:10px}
+@media (max-width:680px){
+ .cols{display:none}
+ .row{grid-template-columns:1fr;gap:6px}
+ .vis::before{content:"Visual";display:block;font:600 11px var(--display);text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+ .aud::before{content:"Audio";display:block;font:600 11px var(--display);text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+}
+.end{padding:20px clamp(16px,4vw,40px) 26px;display:grid;gap:10px}
+.end h2{font:600 18px var(--display);text-transform:uppercase;letter-spacing:.06em;margin:0}
+.end ul{margin:0;padding-left:20px}
+.credit{font-size:13px;color:var(--muted);margin:16px 2px 0;max-width:72ch}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+ <article class="page">
+  <header class="cover">
+   <span class="kicker">Training video script · Draft 2</span>
+   <h1>Rack It Out Safely</h1>
+   <p class="sub">A short safety video for qualified electrical workers who rack low-voltage draw-out circuit breakers. It covers the three checks before racking, using a remote racking device, and verifying the breaker position before lockout.</p>
+   <div class="specs">
+    <div><span class="k">Run time</span><span class="v">3:30</span></div>
+    <div><span class="k">Audience</span><span class="v">Qualified electrical workers</span></div>
+    <div><span class="k">Format</span><span class="v">Live action + motion graphics</span></div>
+    <div><span class="k">Narration</span><span class="v">Off-camera VO, ~140 wpm</span></div>
+   </div>
+  </header>
+
+  <div class="legend"><span><b>VO</b> voiceover</span><span><b>OST</b> on-screen text</span><span><b>SFX</b> sound effect</span><span><b>CU / MS / WS</b> close-up, medium, wide shot</span></div>
+
+  <div class="cols" aria-hidden="true"><span>Time</span><span>Visual</span><span>Audio</span></div>
+
+  <div class="scene">
+   <div class="slug">Scene 1 · Cold open</div>
+   <div class="row"><span class="tc">0:00</span>
+    <div class="vis">WS: switchgear room. A technician in arc-rated PPE stands at a breaker compartment. Freeze frame.<br><span class="ost">OST: Racking is one of the highest-risk tasks in the electrical room</span></div>
+    <div class="aud"><span class="who">VO</span>Racking a breaker takes about a minute. If something goes wrong during that minute, it happens inches from your face.<span class="sfx">SFX: low room hum under VO</span></div></div>
+   <div class="row"><span class="tc">0:12</span>
+    <div class="vis">Title card over slow push-in on the breaker door.<br><span class="ost">Rack It Out Safely</span></div>
+    <div class="aud"><span class="who">VO</span>In the next three minutes, you'll see how to rack a low-voltage breaker without standing in front of it.</div></div>
+
+   <div class="slug">Scene 2 · Three checks before you touch it</div>
+   <div class="row"><span class="tc">0:22</span>
+    <div class="vis">MS: technician reviews a work order and energized work permit on a clipboard.<br><span class="ost">Check 1: Authorization</span></div>
+    <div class="aud"><span class="who">VO</span>First, authorization. Confirm the work order, the breaker number, and any permit your site requires. Racking the wrong breaker is a real and common mistake.</div></div>
+   <div class="row"><span class="tc">0:38</span>
+    <div class="vis">CU: arc flash label on the gear. Motion graphic circles incident energy, PPE category, and arc flash boundary.<br><span class="ost">Check 2: Read the label</span></div>
+    <div class="aud warn"><span class="who">VO</span>Second, read the arc flash label. It tells you the incident energy, the PPE you need, and the arc flash boundary. That boundary is where you want to be standing when the breaker moves.</div></div>
+   <div class="row"><span class="tc">0:56</span>
+    <div class="vis">MS: technician dons arc-rated hood, gloves, and face shield. Quick cuts of each item.<br><span class="ost">Check 3: PPE on before the door opens</span></div>
+    <div class="aud"><span class="who">VO</span>Third, put on your PPE before you open anything. Match it to the label, and inspect it. A torn glove or a scratched face shield doesn't protect you.</div></div>
+
+   <div class="slug">Scene 3 · Open the breaker</div>
+   <div class="row"><span class="tc">1:12</span>
+    <div class="vis">CU: technician presses the OPEN button. CU on the indicator flag changing to OPEN.<br><span class="ost">Verify OPEN on the indicator</span></div>
+    <div class="aud"><span class="who">VO</span>Open the breaker and look at the indicator. Don't rely on the button. The interlock is there to stop you from racking a closed breaker, but your eyes are the first check.</div></div>
+   <div class="row"><span class="tc">1:28</span>
+    <div class="vis">Motion graphic: cutaway of the breaker showing closing springs. Text callout points to the manufacturer manual.<br><span class="ost">Follow the manufacturer's racking procedure</span></div>
+    <div class="aud"><span class="who">VO</span>Some breakers also need their closing springs discharged before racking. Every manufacturer does this a little differently, so follow the instructions for the gear in front of you.</div></div>
+
+   <div class="slug">Scene 4 · Rack remotely</div>
+   <div class="row"><span class="tc">1:44</span>
+    <div class="vis">MS: technician attaches a remote racking device to the racking port, then runs its cable back across the room.<br><span class="ost">Use the remote racking device</span></div>
+    <div class="aud"><span class="who">VO</span>Attach the remote racking device to the racking port. Then walk the controller back, outside the arc flash boundary.</div></div>
+   <div class="row"><span class="tc">2:00</span>
+    <div class="vis">WS from behind the technician: floor marking shows the boundary. Technician stands well outside it and presses the controller.<br><span class="ost">Stand outside the arc flash boundary</span></div>
+    <div class="aud warn"><span class="who">VO</span>Distance is your best protection. With a remote racker, the breaker moves and you don't have to be there. Keep other workers out of the area, too.<span class="sfx">SFX: steady racking motor whir</span></div></div>
+   <div class="row"><span class="tc">2:18</span>
+    <div class="vis">Motion graphic: three-position diagram (Connected, Test, Disconnected). A marker slides to Disconnected.<br><span class="ost">Connected → Test → Disconnected</span></div>
+    <div class="aud"><span class="who">VO</span>The breaker travels from Connected, through Test, to Disconnected. In Test, control power is connected but the main contacts are separated from the bus. Stop at Disconnected.</div></div>
+
+   <div class="slug">Scene 5 · Verify and lock out</div>
+   <div class="row"><span class="tc">2:36</span>
+    <div class="vis">CU: position indicator reads DISCONNECTED. Technician removes the racking device.<br><span class="ost">Confirm the position indicator</span></div>
+    <div class="aud"><span class="who">VO</span>Confirm the position on the indicator before you approach. If it doesn't match what you expect, stop and call your supervisor.</div></div>
+   <div class="row"><span class="tc">2:50</span>
+    <div class="vis">CU: technician applies a lock and tag to the breaker compartment and shutters per site LOTO procedure.<br><span class="ost">Lock and tag per your site LOTO procedure</span></div>
+    <div class="aud"><span class="who">VO</span>Apply your lock and tag according to your site's lockout program. Racked out is not the same as safe. Lockout is what keeps it that way.</div></div>
+
+   <div class="slug">Scene 6 · Recap</div>
+   <div class="row"><span class="tc">3:06</span>
+    <div class="vis">Recap card builds one line at a time over the gear in soft focus.<br><span class="ost">Authorize · Read the label · PPE · Open and verify · Rack remotely · Verify and lock out</span></div>
+    <div class="aud"><span class="who">VO</span>Authorize. Read the label. Suit up. Open and verify. Rack from a distance. Then verify and lock out. Every time, on every breaker.</div></div>
+   <div class="row"><span class="tc">3:24</span>
+    <div class="vis">Fade to black. End slate.<br><span class="ost">Questions? Talk to your electrical safety lead.</span></div>
+    <div class="aud"><span class="sfx">SFX: room hum fades out</span></div></div>
+  </div>
+
+  <footer class="end">
+   <h2>Production notes</h2>
+   <ul>
+    <li>Shoot on de-energized training gear only. Every on-screen worker wears PPE that matches the label shown.</li>
+    <li>Have the site's electrical safety SME review the final cut against the site electrical safety program and the manufacturer's instructions.</li>
+    <li>Caption all narration. On-screen text stays up for at least three seconds.</li>
+   </ul>
+  </footer>
+ </article>
+ <p class="credit">Script writing sample by Lane Reynolds, built with AI-assisted drafting. This is general awareness content for portfolio review. Always follow NFPA 70E, your site's electrical safety program, and the equipment manufacturer's instructions.</p>
+</div>
+
+</body>
+</html>
